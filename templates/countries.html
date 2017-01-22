@@ -1,0 +1,18 @@
+<!-- <button id="getIndianStates" type="button" ng-click="getAllCountries()">Get All Countries</button> -->
+<h4 ng-init="getAllCountries()">{{tableCaption}}</h4>
+<table class='table table-striped' ng-if="showTable">
+  <thead style="background-color: #e7e7e7;">
+    <tr>
+      <th>S. No.</th>
+      <th>Code</th>
+      <th>Country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="data in countriesData">
+      <th>{{$index+1}}</th>
+      <th>{{data.code}}</th>
+      <th>{{data.name}}</th>
+    </tr>
+  </tbody>
+</table>
