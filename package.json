@@ -4,7 +4,7 @@
   "description": "This project is related to get states in a country and all countries list.",
   "main": "\t\t\t\t\t\tnodeCallback.js",
   "scripts": {
-    "start" : "nodemon server.js",
+    "start" : "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
