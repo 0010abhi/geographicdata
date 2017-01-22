@@ -1,0 +1,15 @@
+{
+  "name": "javascript101",
+  "version": "1.0.0",
+  "description": "This project is related to get states in a country and all countries list.",
+  "main": "\t\t\t\t\t\tnodeCallback.js",
+  "scripts": {
+    "start" : "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "abhishek sachdeva",
+  "license": "ISC"
+}

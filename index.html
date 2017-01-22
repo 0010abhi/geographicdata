@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Geopgraphic Data</title>
+    <!-- <base href='/'> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body ng-controller="MyController">
+    <div class="container">
+      <div class='row'>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand">Geopgraphic Data</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li ng-class="(temp==='1') ? 'active' : ''" ng-click="setTemp('1');"><a href="#/states">States In World</a></li>
+              <li ng-class="(temp==='2') ? 'active' : ''" ng-click="setTemp('2');"><a href="#/countries">Countries In World</a></li>
+              <!-- <li><a href="#">Page 3</a></li> -->
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class='row'>
+        <ng-view></ng-view>
+      </div>
+      <div class="row" id="tableForStates"></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <script type="text/javascript">
+    var app = angular.module('MyApp',['ngRoute']);
+    app.controller('MyController',MyController);
+    function MyController($scope){
+      $scope.author = 'Abhishek Sachdeva';
+      $scope.temp = '1';
+      $scope.setTemp = function(temp){
+        $scope.temp = temp;
+      }
+    }
+    app.config(configureRoutes);
+    function configureRoutes($routeProvider){
+      $routeProvider
+      .when("/", {
+          templateUrl : "templates/states.html",
+          controller : statesController
+      })
+      .when("/states", {
+            templateUrl : "templates/states.html",
+            controller : statesController
+      })
+      .when("/countries", {
+            templateUrl : "templates/countries.html",
+            controller : countriesController
+      })
+      .otherwise({
+        redirectTo : '/'
+      });
+    }
+    app.controller('statesController',statesController);
+    function statesController($scope,$http){
+      $scope.countryDropdown = [
+        {'name': 'Select Country', 'code': ''},
+        {'name': 'India', 'code': 'india'},
+        {'name': 'United States Of America', 'code': 'usa'}
+      ];
+      $scope.tableCaption = '';
+      $scope.countryToFetchStates = '';
+      $scope.showTable = false;
+      $scope.getStates = function(){
+        if($scope.countryToFetchStates===''){
+          $scope.showTable = false;
+          $scope.tableCaption = '';
+          return;
+        }
+        $scope.tableCaption = 'List of states in ' + $scope.countryToFetchStates;
+        $http({
+          method: 'GET',
+          url: 'http://localhost:3000/api/states/'+$scope.countryToFetchStates
+        }).then(
+          function(success){
+          $scope.showTable = true;
+          $scope.statesData = [];
+           for (state in success.data) {
+             $scope.statesData.push({'code':state,'country':success.data[state]});
+           }
+          },
+          function(response){
+          console.log(error);
+          }
+        ).catch(function(exception){
+          console.log(exception);
+        })
+      }
+    }
+    app.controller('countriesController',countriesController);
+    function countriesController($scope,$http){
+      $scope.tableCaption = 'List Of Countries';
+      $scope.showTable = false;
+      $scope.getAllCountries = function(){
+        $http({
+          method: 'GET',
+          url: 'http://localhost:3000/api/countries'
+        }).then(
+          function(success){
+          $scope.showTable = true;
+          $scope.countriesData = success.data.countries;
+          },
+          function(response){
+          $scope.tableCaption = 'No Data Found.';
+          $scope.showTable = false;
+          }
+        ).catch(function(exception){
+          console.log(exception);
+          $scope.showTable = false;
+        })
+      }
+    }
+    </script>
+  </body>
+</html>
