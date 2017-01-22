@@ -17,14 +17,14 @@ http.createServer(function(request,response){
     response.writeHead(200, {'Content-Type': 'application/json'});
     response.end(data);
   } else {
-    if(request.url==='/favicon.ico'){
-      fileStream.readFile('favicon.ico',function(err,data){
-        if(err) return console.error(err);
-        response.writeHead(200, {'Content-Type': 'image/x-icon'});
-        //response.write('favicon.ico');
-        response.end(data,'binary');
-      })
-    }
+//     if(request.url==='/favicon.ico'){
+//       fileStream.readFile('favicon.ico',function(err,data){
+//         if(err) return console.error(err);
+//         response.writeHead(200, {'Content-Type': 'image/x-icon'});
+//         //response.write('favicon.ico');
+//         response.end(data,'binary');
+//       })
+//     }
     if(request.url==='/'){
       fileStream.readFile('index.html',function(err,data){
         if(err) return console.error(err);
