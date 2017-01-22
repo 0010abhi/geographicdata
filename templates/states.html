@@ -1,0 +1,23 @@
+<div class='col-sm-3'>
+<select class='form-control' ng-model="countryToFetchStates" ng-click="getStates();">
+  <option ng-repeat="country in countryDropdown" value="{{country.code}}">{{country.name}}</option>
+</select>
+</div>
+<div class='clearfix'></div>
+<h4>{{tableCaption}}</h4>
+<table class='table table-striped' ng-if="showTable">
+  <thead style="background-color: #e7e7e7;">
+    <tr>
+      <th>S. No.</th>
+      <th>Code</th>
+      <th>State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="data in statesData">
+      <th>{{$index+1}}</th>
+      <th>{{data.code}}</th>
+      <th>{{data.country}}</th>
+    </tr>
+  </tbody>
+</table>
