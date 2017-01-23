@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Geopgraphic Data</title>
     <!-- <base href='/'> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   </head>
   <body ng-controller="MyController">
     <div class="container">
@@ -28,9 +28,9 @@
       <div class="row" id="tableForStates"></div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-route/angular-route.min.js"></script>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <script type="text/javascript">
     var app = angular.module('MyApp',['ngRoute']);
@@ -80,7 +80,7 @@
         $scope.tableCaption = 'List of states in ' + $scope.countryToFetchStates;
         $http({
           method: 'GET',
-          url: 'http://localhost:3000/api/states/'+$scope.countryToFetchStates
+          url: 'http://www.geographicdata.herokuapp.com/api/states/'+$scope.countryToFetchStates
         }).then(
           function(success){
           $scope.showTable = true;
@@ -104,7 +104,7 @@
       $scope.getAllCountries = function(){
         $http({
           method: 'GET',
-          url: 'http://localhost:3000/api/countries'
+          url: 'http://www.geographicdata.herokuapp.com/api/countries'
         }).then(
           function(success){
           $scope.showTable = true;
