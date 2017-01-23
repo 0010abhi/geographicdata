@@ -1,6 +1,7 @@
 var http = require('http');
 var fileStream = require('fs');
-var port = 8080;
+// var favicon = require('serve-icon')
+var port = 3000;
 
 http.createServer(function(request,response){
   var apiOrTemplate = (request.url.substring(1,4)==='api') ? 'api' : 'template';
@@ -16,6 +17,24 @@ http.createServer(function(request,response){
     response.writeHead(200, {'Content-Type': 'application/json'});
     response.end(data);
   } else {
+    if(request.url.match('.js')){
+      var filePath = '.' + request.url;
+      fileStream.readFile(filePath,function(err,data){
+        if(err) return console.error(err);
+        response.writeHead(200, {'Content-Type': 'text/javascript'});
+        //response.write('favicon.ico');
+        response.end(data,'utf-8');
+      })
+    }
+    if(request.url.match('.css')){
+      var filePath = '.' + request.url;
+      fileStream.readFile(filePath,function(err,data){
+        if(err) return console.error(err);
+        response.writeHead(200, {'Content-Type': 'text/css'});
+        //response.write('favicon.ico');
+        response.end(data,'utf-8');
+      })
+    }
     if(request.url==='/'){
       fileStream.readFile('index.html',function(err,data){
         if(err) return console.error(err);
@@ -36,3 +55,5 @@ http.createServer(function(request,response){
     }
   }
 }).listen(port);
+
+console.log('Server started on localhost:'+port);
