@@ -2,9 +2,10 @@
 <html ng-app="MyApp">
   <head>
     <meta charset="utf-8">
+
     <title>Geopgraphic Data</title>
-    <!-- <base href='/'> -->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <base href='/' />
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
   </head>
   <body ng-controller="MyController">
     <div class="container">
@@ -15,8 +16,8 @@
               <a class="navbar-brand">Geopgraphic Data</a>
             </div>
             <ul class="nav navbar-nav">
-              <li ng-class="(temp==='1') ? 'active' : ''" ng-click="setTemp('1');"><a href="#/states">States In World</a></li>
-              <li ng-class="(temp==='2') ? 'active' : ''" ng-click="setTemp('2');"><a href="#/countries">Countries In World</a></li>
+              <li ng-class="(temp==='1') ? 'active' : ''" ng-click="setTemp('1');"><a href="/states">States In World</a></li>
+              <li ng-class="(temp==='2') ? 'active' : ''" ng-click="setTemp('2');"><a href="/countries">Countries In World</a></li>
               <!-- <li><a href="#">Page 3</a></li> -->
             </ul>
           </div>
@@ -28,9 +29,9 @@
       <div class="row" id="tableForStates"></div>
     </div>
 
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/angular/angular.min.js"></script>
-    <script src="node_modules/angular-route/angular-route.min.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/angular/angular.min.js"></script>
+    <script src="./node_modules/angular-route/angular-route.min.js"></script>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <script type="text/javascript">
     var app = angular.module('MyApp',['ngRoute']);
@@ -43,7 +44,7 @@
       }
     }
     app.config(configureRoutes);
-    function configureRoutes($routeProvider){
+    function configureRoutes($routeProvider,$locationProvider){
       $routeProvider
       .when("/", {
           templateUrl : "templates/states.html",
@@ -60,6 +61,7 @@
       .otherwise({
         redirectTo : '/'
       });
+       $locationProvider.html5Mode(true);
     }
     app.controller('statesController',statesController);
     function statesController($scope,$http){
