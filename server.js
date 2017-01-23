@@ -4,7 +4,7 @@ var fileStream = require('fs');
 var port = process.env.PORT || '3000';
 
 http.createServer(function(request,response){
-  var apiOrTemplate = (request.url.substring(1,4)==='api') ? 'api' : 'template';
+  var apiOrTemplate = ((request.url).match('api')) ? 'api' : 'template';
   if(apiOrTemplate==='api'){
     var data,country;
     if((request.url).match('/api/states/')){
