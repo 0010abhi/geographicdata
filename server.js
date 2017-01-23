@@ -1,7 +1,7 @@
 var http = require('http');
 var fileStream = require('fs');
 // var favicon = require('serve-icon')
-var port = 3000;
+var port = process.env.PORT || '3000';
 
 http.createServer(function(request,response){
   var apiOrTemplate = (request.url.substring(1,4)==='api') ? 'api' : 'template';
