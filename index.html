@@ -100,7 +100,7 @@
       }
     }
     app.controller('countriesController',countriesController);
-    function countriesController($scope,$http){
+    function countriesController($scope,$http,$q){
       $scope.tableCaption = 'List Of Countries';
       $scope.showTable = false;
       $scope.getAllCountries = function(){
