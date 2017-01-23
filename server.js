@@ -12,7 +12,7 @@ http.createServer(function(request,response){
       data = fileStream.readFileSync(country);
     };
     if(request.url==='/api/countries'){
-      data = fileStream.readFileSync('data/Countries.json');
+      data = fileStream.readFileSync('data/countries.json');
     };
     response.writeHead(200, {'Content-Type': 'application/json'});
     response.end(data);
@@ -33,6 +33,14 @@ http.createServer(function(request,response){
         response.writeHead(200, {'Content-Type': 'text/css'});
         //response.write('favicon.ico');
         response.end(data,'utf-8');
+      })
+    }
+    if(request.url==='/favicon.ico'){
+      fileStream.readFile('favicon.ico',function(err,data){
+        if(err) return console.error(err);
+        response.writeHead(200, {'Content-Type': 'image/x-icon'});
+        response.write(data,'binary');
+        response.end();
       })
     }
     if(request.url==='/'){
