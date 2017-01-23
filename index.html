@@ -82,7 +82,7 @@
         $scope.tableCaption = 'List of states in ' + $scope.countryToFetchStates;
         $http({
           method: 'GET',
-          url: 'https://geographicdata.herokuapp.com/api/states/'+$scope.countryToFetchStates
+          url: '/api/states/'+$scope.countryToFetchStates
         }).then(
           function(success){
           $scope.showTable = true;
@@ -106,7 +106,7 @@
       $scope.getAllCountries = function(){
         $http({
           method: 'GET',
-          url: 'https://geographicdata.herokuapp.com/api/countries'
+          url: '/api/countries'
         }).then(
           function(success){
           $scope.showTable = true;
